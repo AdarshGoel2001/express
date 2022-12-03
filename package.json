@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@lighthouse-web3/sdk": "^0.1.9",
-    "ethers": "^5.7.2"
+    "ethers": "^5.7.2",
+    "fs": "^0.0.1-security"
   }
 }
