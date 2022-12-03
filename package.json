@@ -8,5 +8,9 @@
     "start": "node server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@lighthouse-web3/sdk": "^0.1.9",
+    "ethers": "^5.7.2"
+  }
 }
