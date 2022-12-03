@@ -38,6 +38,7 @@ const qrGenerator = async (creditScore,salary) => {
 
   const qrLink = `https://api-staging.polygonid.com/v1/offers-qrcode/${claimId}/download?sessionID=${sessionId}`;
 
+  console.log(qrLink)
   return qrLink;
 }
 
