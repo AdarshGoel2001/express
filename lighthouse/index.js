@@ -12,7 +12,7 @@ const cidGenerator = async (userInfo, ethAddress) => {
   });
 
   const cid = await deployEncrypted(`/Users/im-adithya/Coding/opensource/express/userInfo-${time_now}.txt`);
-  await accessControl(cid);
+  await accessControl(cid, ethAddress);
   const key = await getfileEncryptionKey(cid);
 
   // delete file;
@@ -24,5 +24,4 @@ const cidGenerator = async (userInfo, ethAddress) => {
   return cid;
 }
 
-cidGenerator({name: "adithya"})
 module.exports = cidGenerator;

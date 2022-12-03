@@ -1,11 +1,24 @@
 const express = require("express");
+const cors = require('cors');
+
 const app = express();
+const bodyParser = require('body-parser')
 
 const kycBackend = require("./kyc")
 const polygonQRGenerator = require("./polygon")
 const lighthouseCIDGenerator = require("./lighthouse")
 
-app.post("/api/kyc", (req, res) => {
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
+app.use(cors());
+
+app.get("/", (req, res) => {
+  res.send("hello there")
+});
+
+app.post("/api/kyc", async (req, res) => {
   const fname = req.body.fname;
   const lname = req.body.lname;
   const aadhaar = req.body.aadhaar;
@@ -18,9 +31,9 @@ app.post("/api/kyc", (req, res) => {
   const {creditScore, salary} = kycBackend(user);
 
   // Generate Polygon QR
-  const qrLink = polygonQRGenerator(creditScore,salary);
+  const qrLink = await polygonQRGenerator(creditScore,salary);
   // Generate CID from lighthouse
-  const cid = lighthouseCIDGenerator({...user,creditScore,salary},ethAddress);
+  const cid = await lighthouseCIDGenerator({...user,creditScore,salary},ethAddress);
 
   res.send({qrLink, cid})
 });

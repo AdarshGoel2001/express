@@ -3,7 +3,7 @@ const signAuthMessage = require("./signAuthMessage");
 
 const { publicKey, privateKey } = require("../const");
 
-const accessControl = async (cid) => {
+const accessControl = async (cid, ethAddress) => {
   // Conditions to add
   const conditions = [
     {
@@ -29,5 +29,4 @@ const accessControl = async (cid) => {
   return response.data.cid;
 };
 
-// accessControl();
 module.exports = accessControl;

@@ -23,4 +23,4 @@ const decrypt = async(cid) =>{
   fs.createWriteStream("fileName.png").write(Buffer.from(decrypted))  
 }
 
-decrypt()
+module.exports = decrypt;
