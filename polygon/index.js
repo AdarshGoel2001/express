@@ -18,32 +18,25 @@ const generateBody = (creditScore,salary) => {
   return body;
 }
 
-const refreshToken = async () => {
-  const newTokenResponse = axios.post()
-}
-
 const qrGenerator = async (creditScore,salary) => {
   const body = generateBody(creditScore,salary)
   
   const claimResponse = await axios.post(
     "https://api-staging.polygonid.com/v1/issuers/25423c36-dd2d-43fe-9a46-23deb3e40dc0/schemas/cd31917a-f429-4852-ac98-cc56395cb18c/offers",
+    body,
     {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body
     }
   );
-  const claimId = claimResponse.id;
-  console.log(claimId);
+  const claimId = claimResponse.data.id;
 
   const sessionResponse = await axios.post(`https://api-staging.polygonid.com/v1/offers-qrcode/${claimId}`);
-  const sessionId = sessionResponse.id;
-  console.log(sessionId);
+  const sessionId = sessionResponse.data.sessionID;
 
-  const qrLink = `https://platform-test.polygonid.com/claim-link/${sessionId}`;
-  console.log(qrLink);
+  const qrLink = `https://api-staging.polygonid.com/v1/offers-qrcode/${claimId}/download?sessionID=${sessionId}`;
 
   return qrLink;
 }
