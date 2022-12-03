@@ -12,9 +12,7 @@ const deployEncrypted = async (path) => {
     publicKey,
     signed_message
   );
-  console.log(response);
   return response.data.Hash; // CID of userInfo file
 };
 
-deployEncrypted("/Users/im-adithya/Desktop/img.png");
 module.exports = deployEncrypted;
