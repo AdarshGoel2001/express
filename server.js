@@ -12,7 +12,7 @@ app.post("/api/kyc", (req, res) => {
   const dob = req.body.dob;
   const ethAddress = req.body.ethAddress;
 
-  const user = {fname, lname, aadhaar, dob, ethAddress};
+  const user = {fname, lname, aadhaar, dob};
 
   // Get Credit Score and Salary of the requester
   const {creditScore, salary} = kycBackend(user);
@@ -20,7 +20,7 @@ app.post("/api/kyc", (req, res) => {
   // Generate Polygon QR
   const qrLink = polygonQRGenerator(creditScore,salary);
   // Generate CID from lighthouse
-  const cid = lighthouseCIDGenerator({...user,creditScore,salary});
+  const cid = lighthouseCIDGenerator({...user,creditScore,salary},ethAddress);
 
   res.send({qrLink, cid})
 });
