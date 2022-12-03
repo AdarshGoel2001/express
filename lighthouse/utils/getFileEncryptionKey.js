@@ -3,18 +3,16 @@ const signAuthMessage = require("./signAuthMessage");
 
 const { publicKey, privateKey } = require("../const");
 
-const getfileEncryptionKey = async () => {
+const getfileEncryptionKey = async (cid) => {
   // Get key back after passing access control condition
-  const cid = "QmXtLgrwUYq3GeCXX3pjDG76byRkr4dUbmhRe148YqHgTK";
   const signedMessage = await signAuthMessage(publicKey, privateKey);
 
-  const key = await lighthouse.fetchEncryptionKey(
+  const response = await lighthouse.fetchEncryptionKey(
     cid,
     publicKey,
     signedMessage
   );
-  console.log(key);
-  return key;
+  return response.data.key;
 };
 
 // getfileEncryptionKey()

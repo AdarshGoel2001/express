@@ -26,7 +26,6 @@ const accessControl = async (cid) => {
     conditions,
     aggregator
   );
-  console.log(response);
   return response.data.cid;
 };
 
